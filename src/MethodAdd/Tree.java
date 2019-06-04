@@ -290,43 +290,42 @@ public class Tree {
         
         for (int i = 0; i < a.length(); i++) {
             char c = a.charAt(i);
-            if (c == '(' || c == '-' || c == '*' || c == '/') {
+            if (c == '(' || c == '+' || c == '-' || c == '*' || c == '/') {
                 operator.push(new TreeNode(c));
             } else if (c == ')'){
-                kanan = operand.pop();
-                kiri = operand.pop();
-                akar = operand.pop();
-                operand.push(combine(akar, root, kiri));            }
-        }
-        
-        char c=a.charAt(0);
-        
-        switch (c) {
-            case '(':
-                operator.push(new TreeNode(c));
-                break;
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-                operator.push(new TreeNode(c));
-                break;
-            default:
+                akar = operator.pop();
+                while (akar.element != '(') {
+                    kanan = operand.pop();
+                    kiri = operand.pop();
+                    operand.push(combine(akar, kiri, kanan));
+                    akar = operator.pop();
+                }
+            } else {
                 operand.push(new TreeNode(c));
+            }
         }
+        root = operand.pop();
     }
     
-    public void addExpressionPrefix(String a){
-        
+    public void inOrder(){
+        inOrderRec(root);
     }
     
-    public void addExpressionPostfix(String a){
-        
+    private void inOrderRec(TreeNode root){
+        if (root != null) {
+            inOrderRec(root.leftChild);
+            System.out.print(root.element + " ");
+            inOrderRec(root.rightChild);
+        }
     }
     
     private TreeNode combine(TreeNode operator, TreeNode nodeLeft, TreeNode nodeRight){
         operator.leftChild = nodeLeft;
         operator.rightChild = nodeRight;
         return operator;
+    }
+    
+    public boolean isOperator(TreeNode root){
+        return root.element == '+' || root.element == '-' || root.element == '*' || root.element == '/';
     }
 }

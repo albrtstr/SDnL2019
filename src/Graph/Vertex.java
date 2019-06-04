@@ -33,6 +33,5 @@ public class Vertex {
     public void setFlagVisited(boolean flagVisited) {
         this.flagVisited = flagVisited;
     }
-    
-    
+ 
 }

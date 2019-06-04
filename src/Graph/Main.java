@@ -17,14 +17,23 @@ public class Main {
         graph.addVertex('C');
         graph.addVertex('D');
         graph.addVertex('E');
+        graph.addVertex('F');
+        graph.addVertex('G');
+        graph.addVertex('H');
+        graph.addVertex('I');
         
-        graph.addEdge('A', 'B', 20);
-        graph.addEdge('A', 'C', 30);
-        graph.addEdge('A', 'D', 40);
-        graph.addEdge('A', 'E', 50);
-        graph.addEdge('B', 'C', 60);
-        graph.addEdge('C', 'D', 40);
-        graph.addEdge('C', 'E', 40);
+        
+        graph.addEdge('A', 'B', 50);
+        graph.addEdge('A', 'I', 20);
+        graph.addEdge('A', 'F', 60);
+        graph.addEdge('B', 'C', 50);
+        graph.addEdge('B', 'E', 30);
+        graph.addEdge('C', 'E', 20);
+        graph.addEdge('C', 'D', 20);
+        graph.addEdge('D', 'H', 20);
+        graph.addEdge('D', 'G', 30);
+        graph.addEdge('G', 'E', 20);
+        graph.addEdge('G', 'F', 60);
         
         graph.show();
         System.out.println();
