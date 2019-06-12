@@ -37,23 +37,32 @@ public class Graph {
     }
 
     public ArrayList<Edge> prim(){
-        int seed = 0;
         ArrayList<Edge> primEdge = new ArrayList<Edge>();
-        ArrayList<Integer> primVertex = new ArrayList<>();
+        ArrayList<Integer> primVertex = new ArrayList<Integer>();
+        int seed = 0;
         primVertex.add(seed);
         vertexList[seed].flagVisited = true;
-        while (primVertex.size() < vertexList.length) {
-            int tempMinWeigth;
+        while (primVertex.size() < countVertex) {
+            int tempMinWeigth = Integer.MAX_VALUE;
             int tempMinIndexVertexI = -1;
             int tempMinIndexVertexJ = -1;
             for (int i = 0; i < primVertex.size(); i++) {
                 for (int j = 0; j < vertexList.length; j++) {
-                    if (primVertex[i]) {
-                        
+                    if (adjancencyMatrix[primVertex.get(i)][j] > 0
+                            && !vertexList[j].flagVisited
+                            && adjancencyMatrix[primVertex.get(i)][j] < tempMinWeigth) {
+                        tempMinWeigth = adjancencyMatrix[primVertex.get(i)][j];
+                        tempMinIndexVertexI = primVertex.get(i);
+                        tempMinIndexVertexJ = j;
                     }
                 }
             }
+            primVertex.add(tempMinIndexVertexJ);
+            vertexList[tempMinIndexVertexJ].flagVisited = true;
+            primEdge.add(new Edge(tempMinIndexVertexI, tempMinIndexVertexJ, 
+                    adjancencyMatrix[tempMinIndexVertexI][tempMinIndexVertexJ]));
         }
+        return primEdge;
     }
     
     public int getMaxVertex() {

@@ -38,5 +38,6 @@ public class Main {
         graph.show();
         System.out.println();
         graph.dfs();
+        System.out.println();
     }
 }
